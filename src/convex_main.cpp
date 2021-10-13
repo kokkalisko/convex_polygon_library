@@ -13,6 +13,7 @@ std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
 
 void exampleRectangularWithRandomPoints()
 {
+    // Create the 2x2 rectangular polygon
     Point p1 = {1.0,1.0};
     Point p2 = {-1.0,1.0};
     Point p3 = {-1.0,-1.0};
@@ -25,6 +26,7 @@ void exampleRectangularWithRandomPoints()
     for (size_t iter = 0; iter < 1000; ++iter)
         pointsForConvexHull.emplace_back(Point(distribution(gen), distribution(gen)));
 
+    // Calculate the convex hull polygon
     std::stack<Point> convexHull = convex_hull_from_points(pointsForConvexHull);
 
     std::vector<std::vector<double>> polygonCoordinates = VisualizePolygon(convexHull);
@@ -47,6 +49,7 @@ void exampleRandomPolygonUniformDistribution()
     for (size_t iter = 0; iter < 100; ++iter)
         pointsForConvexHull.emplace_back(Point(distribution(gen), distribution(gen)));
 
+    // Calculate the convex hull polygon of the uniformly distributed points
     std::stack<Point> convexHull = convex_hull_from_points(pointsForConvexHull);
 
     std::vector<std::vector<double>> polygonCoordinates = VisualizePolygon(convexHull);
@@ -68,6 +71,7 @@ void exampleRandomPolygonNormalDistribution()
     for (size_t iter = 0; iter < 100; ++iter)
         pointsForConvexHull.emplace_back(Point(distribution(gen), distribution(gen)));
 
+    // Calculate the convex hull polygon of the normally distributed points
     std::stack<Point> convexHull = convex_hull_from_points(pointsForConvexHull);
 
     std::vector<std::vector<double>> polygonCoordinates = VisualizePolygon(convexHull);
@@ -79,15 +83,62 @@ void exampleRandomPolygonNormalDistribution()
     plt::show();
 }
 
+void examplePointsInsideRectangular()
+{
+    // Create the 2x2 rectangular polygon
+    Point p1 = {1.0,1.0};
+    Point p2 = {-1.0,1.0};
+    Point p3 = {-1.0,-1.0};
+    Point p4 = {1.0,-1.0};
+    std::vector<Point> pointsForConvexHull = {p1,p2,p3,p4};
+    std::stack<Point> convexHull = convex_hull_from_points(pointsForConvexHull);
 
+    std::normal_distribution<double> distribution(0.0,1.0);
+
+    // Find which points are included in the polygon and which are not
+    std::vector<Point> insideThePolygon, outsideThePolygon; 
+    for (size_t iter = 0; iter < 100; ++iter)
+    {
+        Point randomPoint(distribution(gen), distribution(gen));
+        if (point_is_in_polygon(randomPoint, convexHull))
+            insideThePolygon.emplace_back(randomPoint);
+        else 
+            outsideThePolygon.emplace_back(randomPoint);
+    }
+
+    std::vector<std::vector<double>> polygonCoordinates = VisualizePolygon(convexHull);
+    std::vector<std::vector<double>> pointsInsideThePolygon = VisualizePoints(insideThePolygon);
+    std::vector<std::vector<double>> pointsOutsideThePolygon = VisualizePoints(outsideThePolygon);
+
+    plt::plot(polygonCoordinates[0],polygonCoordinates[1], {{"label", "polygon"}});
+
+    plt::scatter(pointsInsideThePolygon[0],pointsInsideThePolygon[1], {{"label", "inside the polygon"}, {"c", "r"}, {"linewidths", "2.5"}});
+    plt::scatter(pointsOutsideThePolygon[0],pointsOutsideThePolygon[1], {{"label", "outside the polygon"}, {"c", "y"}, {"linewidths", "2.5"}});
+
+    plt::legend();
+    plt::show();
+}
 
 int main()
 {
+    std::cout << "Initiating examples" << std::endl;
+
+    std::cout << "Here is a first example with a 2X2 rectangular with randomly generated points inside." << std::endl;
+    std::cout << "The 4 corners of the rectangular are given by hand and the points are distributed uniformly." << std::endl;
+    std::cout << "A convex hull polygon of these points is computed." << std::endl;
     exampleRectangularWithRandomPoints();
 
+    std::cout << "This example finds a convex hull polygon out of points distributed with a uniform distribution." << std::endl;
     exampleRandomPolygonUniformDistribution();
 
+    std::cout << "This example finds a convex hull polygon out of points distributed with a normal distribution." << std::endl;
     exampleRandomPolygonNormalDistribution();
+
+    std::cout << "This example shows with red and yellow color the points that were found to be included and not included respectively inside the rectangular." << std::endl;
+    std::cout << "The points are normally distributed and the points of the convex hull are." << std::endl;
+    examplePointsInsideRectangular();
+
+    // TODO: Add examples of intersecting rectangulars
 
 }
 

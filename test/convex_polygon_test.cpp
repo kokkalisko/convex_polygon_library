@@ -100,7 +100,7 @@ TEST(ConvexPolygonIncludePoint, On_the_edge)
 TEST(ConvexPolygonIncludePoint, Time_comparison1)
 {
     // In case this test becomes flaky, increase maximumIterations
-    const size_t maximumIterations = 10;
+    const size_t maximumIterations = 500;
 
     std::stack<Point> convexPolygon =  CreateRectangular();
 

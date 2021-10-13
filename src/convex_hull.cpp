@@ -1,6 +1,7 @@
 #include "convex_polygon_library/convex_hull.h"
 #include <functional>
 #include <algorithm>
+#include <stdexcept>
 
 // Pass by value in order to sort the vector later
 std::stack<Point> convex_hull_from_points(std::vector<Point> points)
