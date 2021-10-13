@@ -52,7 +52,7 @@ make
 ```
 4. Run the main executable 
 ```
-make
+./convex_main 
 ```
 6. Perform the tests (optional)
 ```

@@ -119,6 +119,49 @@ void examplePointsInsideRectangular()
     plt::show();
 }
 
+
+void exampleIntersectingRectangulars()
+{
+    // Generate two normal distributions
+    std::normal_distribution<double> distribution1(0.0,1.0);
+    std::normal_distribution<double> distribution2(2.0,1.0);
+
+    // Randomly generated polygon number 1
+    std::vector<Point> pointsForConvexHull1 = {};
+    for (size_t iter = 0; iter < 10; ++iter)
+    {
+        Point randomPoint(distribution1(gen), distribution1(gen));
+        pointsForConvexHull1.emplace_back(randomPoint);
+    }
+    std::stack<Point> convexHull1 = convex_hull_from_points(pointsForConvexHull1);
+
+    std::vector<std::vector<double>> polygonCoordinates1 = VisualizePolygon(convexHull1);
+
+    plt::plot(polygonCoordinates1[0],polygonCoordinates1[1], {{"label", "polygon1"}});
+
+    // Randomly generated polygon number 2
+    std::vector<Point> pointsForConvexHull2 = {};
+    for (size_t iter = 0; iter < 10; ++iter)
+    {
+        Point randomPoint(distribution2(gen), distribution2(gen));
+        pointsForConvexHull2.emplace_back(randomPoint);
+    }
+    std::stack<Point> convexHull2 = convex_hull_from_points(pointsForConvexHull2);
+
+    std::vector<std::vector<double>> polygonCoordinates2 = VisualizePolygon(convexHull2);
+
+    plt::plot(polygonCoordinates2[0],polygonCoordinates2[1], {{"label", "polygon2"}});
+
+    // Check whether the two polygon intersect and print an appropriate message
+    if (do_intersect(convexHull1, convexHull2))
+        std::cout << "The two polygons do intersect" << std::endl;
+    else
+        std::cout << "The two polygons do not intersect" << std::endl;
+
+    plt::legend();
+    plt::show();
+}
+
 int main()
 {
     std::cout << "Initiating examples" << std::endl;
@@ -138,7 +181,11 @@ int main()
     std::cout << "The points are normally distributed and the points of the convex hull are." << std::endl;
     examplePointsInsideRectangular();
 
-    // TODO: Add examples of intersecting rectangulars
-
+    std::cout << "This example shows whether two randomly generated polygons intercept with each other. It prints an appropriate message" << std::endl;
+    for (size_t iter = 0; iter < 5; ++iter)
+    {
+        std::cout << "Iteration " << iter+1 << ": ";
+        exampleIntersectingRectangulars();
+    }
 }
 
