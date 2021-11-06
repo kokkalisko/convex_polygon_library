@@ -1,7 +1,7 @@
-#include "convex_polygon_library/convex_hull.h"
-#include "convex_polygon_library/convex_polygon.h"
-#include "convex_polygon_library/visualization_utilities.h"
-#include "convex_polygon_library/matplotlibcpp.h"
+#include "polygon_operations/convex_hull.h"
+#include "polygon_operations/convex_polygon.h"
+#include "visualization_utilities.h"
+#include "matplotlibcpp.h"
 namespace plt = matplotlibcpp;
 
 #include <iostream>

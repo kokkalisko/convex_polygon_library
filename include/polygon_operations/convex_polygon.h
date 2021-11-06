@@ -1,7 +1,7 @@
 #ifndef CONVEX_POLYGON_H
 #define CONVEX_POLYGON_H
 
-#include "convex_polygon_library/utilities.h"
+#include "polygon_operations/utilities.h"
 #include <stack>
 
 /*!

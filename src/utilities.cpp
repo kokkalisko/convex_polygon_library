@@ -1,4 +1,4 @@
-#include "convex_polygon_library/utilities.h"
+#include "polygon_operations/utilities.h"
 #include <cmath>
 #include <stdexcept>
 

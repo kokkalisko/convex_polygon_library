@@ -1,4 +1,4 @@
-#include "convex_polygon_library/visualization_utilities.h"
+#include "visualization_utilities.h"
 
 std::vector<std::vector<double>> VisualizePolygon(const std::vector<Point>& polygon)
 {
