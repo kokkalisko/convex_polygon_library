@@ -10,8 +10,14 @@ RUN apt-get update && apt-get install -y python3-pip python3-numpy \
 # Install packages required for testing
 RUN apt-get update && apt-get install -y libgtest-dev libgmock-dev
 
+# Configure CMake
 WORKDIR /home/polygon_operations
-
 RUN cmake -B /home/polygon_operations/build -DCMAKE_BUILD_TYPE=Release -DENABLE_TEST=ON
 
+# Build
 RUN cmake --build /home/polygon_operations/build --config Release
+
+# Install package
+WORKDIR /home/polygon_operations/build
+RUN cpack -G DEB
+RUN dpkg -i *.deb

@@ -6,7 +6,7 @@ set(header_files ${header_path}/convex_hull.h
 
 # set source files
 set(src convex_hull.cpp
-        convex_polygon
+        convex_polygon.cpp
 		utilities.cpp)
 
 add_library(polygon_operations SHARED ${src})
