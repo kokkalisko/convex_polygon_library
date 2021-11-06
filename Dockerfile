@@ -1,7 +1,7 @@
 FROM rikorose/gcc-cmake:latest
 
 # Add all files inside the repo to HOME library
-ADD . /home/convex_polygon_library
+ADD . /home/polygon_operations
 
 # Install packages required for visualization
 RUN apt-get update && apt-get install -y python3-pip python3-numpy \
@@ -10,12 +10,8 @@ RUN apt-get update && apt-get install -y python3-pip python3-numpy \
 # Install packages required for testing
 RUN apt-get update && apt-get install -y libgtest-dev libgmock-dev
 
-WORKDIR /home/convex_polygon_library
+WORKDIR /home/polygon_operations
 
-RUN mkdir build
+RUN cmake -B /home/polygon_operations/build -DCMAKE_BUILD_TYPE=Release -DENABLE_TEST=ON
 
-WORKDIR /home/convex_polygon_library/build
-
-RUN cmake -DENABLE_TEST=ON ..
-
-RUN make
+RUN cmake --build /home/polygon_operations/build --config Release
