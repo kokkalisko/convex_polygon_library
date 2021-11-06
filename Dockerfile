@@ -21,3 +21,6 @@ RUN cmake --build /home/polygon_operations/build --config Release
 WORKDIR /home/polygon_operations/build
 RUN cpack -G DEB
 RUN dpkg -i *.deb
+
+# Return to source directory
+WORKDIR /home/polygon_operations
