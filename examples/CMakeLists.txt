@@ -17,9 +17,11 @@ else()
 endif()
 
 add_library(visualization_utilities visualization_utilities.cpp)
-target_link_libraries(visualization_utilities polygon_operations_lib)
+target_link_libraries(visualization_utilities polygon_operations)
 target_include_directories(visualization_utilities PUBLIC ${polygon_operations_SOURCE_DIR}/include ${polygon_operations_SOURCE_DIR}/examples)
 
 add_executable(example1 example1.cpp)
-target_link_libraries(example1 polygon_operations_lib visualization_utilities ${Python3_LIBRARIES})
+target_link_libraries(example1 polygon_operations visualization_utilities ${Python3_LIBRARIES})
 target_include_directories(visualization_utilities PUBLIC ${polygon_operations_SOURCE_DIR}/include ${polygon_operations_SOURCE_DIR}/examples)
+
+install(TARGETS example1 DESTINATION bin)
