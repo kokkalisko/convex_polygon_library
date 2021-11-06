@@ -23,5 +23,3 @@ target_include_directories(visualization_utilities PUBLIC ${polygon_operations_S
 add_executable(example1 example1.cpp)
 target_link_libraries(example1 polygon_operations visualization_utilities ${Python3_LIBRARIES})
 target_include_directories(visualization_utilities PUBLIC ${polygon_operations_SOURCE_DIR}/include ${polygon_operations_SOURCE_DIR}/examples)
-
-install(TARGETS example1 DESTINATION bin)
