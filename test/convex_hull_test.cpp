@@ -1,4 +1,4 @@
-#include "convex_polygon_library/convex_hull.h"
+#include "polygon_operations/convex_hull.h"
 #include "gtest/gtest.h"
 #include <random>
 #include <chrono>

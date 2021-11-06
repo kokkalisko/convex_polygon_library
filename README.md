@@ -1,4 +1,7 @@
-# convex_polygon_library
+# polygon_operations
+
+![example workflow](https://github.com/kokkalisko/polygon_operations/actions/workflows/cmake.yml/badge.svg)
+
 
 This is a short library written to perform simple operations with polygons in 2D.
 
@@ -41,7 +44,7 @@ cd build
 
 To build the tests along the other binaries:
 ```
-cmake -DENABLE_TEST=ON .. 
+cmake -DENABLE_TEST=ON 
 make
 ```
 
@@ -50,19 +53,21 @@ To build solely the binaries:
 cmake .. 
 make
 ```
-4. Run the main executable 
+4. Run an example executable 
 ```
-./convex_main 
+./examples/example1 
 ```
+
+The output of the example executable should be a series of graphs and output messages.
+
 6. Perform the tests (optional)
 ```
-make test
+cd ./test
+ctest -VV
 ```
-The output of the main executable should be a series of graphs and output messages.
-
 # Dockerfile
 
-A dockerfile for Linux (named Dockerfile) was also provided in order to build an image corresponding to a container were the library was already built with `CMake`. 
+A dockerfile for Linux (named Dockerfile) was also provided in order to build an image corresponding to a container were the library was already built with `CMake`. In the container the dynamic library of the package (named `libpolygon_operations.so`) is place inside the `/usr/lib/polygon_operations/` directory. The resulting docker image can be found in the following public [repo](https://hub.docker.com/repository/docker/kokkalisko/polygon_operations/) in DockerHub.
 
 # Notes on the structure of the package
 
@@ -74,8 +79,10 @@ The directory layout (after building the package):
     ├── CMakeLists.txt          # Contains a set of directives and instructions describing the project's source files and targets
     ├── Dockerfile              # File to create a docker image with the built binaries
     ├── .gitignore              # File containing which folders and files should be neglected from git
+    ├── .github                 # Folder containing the workflows for CI/CD
+    ├── examples                # Example executable demonstrating the functionality
     ├── include		            # Folder containing the project headers
     ├── LICENSE				    # Apache 2.0 license
     ├── README.md
     ├── src                     # Project source files (.cpp file)
-    └── test                    # Automated tests (usigng GTest)
+    └── test                    # Automated tests (using GTest)

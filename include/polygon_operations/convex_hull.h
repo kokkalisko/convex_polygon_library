@@ -1,7 +1,7 @@
 #ifndef CONVEX_HULL_H
 #define CONVEX_HULL_H
 
-#include "convex_polygon_library/utilities.h"
+#include "polygon_operations/utilities.h"
 
 /*!
  * Computes a convex hull of a number of points in 2D using Graham scan with 
