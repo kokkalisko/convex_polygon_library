@@ -1,6 +1,6 @@
 # polygon_operations
 
-![example workflow](https://github.com/kokkalisko/polygon_operations/actions/workflows/cmake.yml/badge.svg?event=pull_request)
+![example workflow](https://github.com/kokkalisko/polygon_operations/actions/workflows/cmake.yml/badge.svg)
 
 
 This is a short library written to perform simple operations with polygons in 2D.
